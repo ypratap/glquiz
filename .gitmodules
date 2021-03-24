@@ -1,0 +1,3 @@
+[submodule "BinaryFunction"]
+	path = BinaryFunction
+	url = https://github.com/ypratap/glquiz.git
