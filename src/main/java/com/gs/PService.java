@@ -1,13 +1,14 @@
 package com.gs;
 
 import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PService {
 
-	@Autowired
+	@Autowired(required = true)
 	private PRepository repository;
 
 	public ArrayList<String> palindromeList(String str) {
@@ -38,9 +39,22 @@ public class PService {
 		return longestString;
 	}
 
-	public Palindrome save(Palindrome p1) {
-		return repository.save(p1);
+	public void save(String s, String p1) {
+		PEntity pe = new PEntity();
+		pe.setLargestPalindrome(p1);
+		pe.set_s_(s);
+		repository.save(pe);
+	}
 
+	public String fetchPalindrome() {
+
+		ArrayList<PEntity> pel = (ArrayList<PEntity>) repository.findAll();
+		String pe = null;
+		if (pel.size() != 0) {
+			pe = pel.get(pel.size() - 1).getLargestPalindrome();
+		}
+
+		return pe;
 	}
 
 }

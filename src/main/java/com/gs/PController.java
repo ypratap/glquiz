@@ -16,19 +16,22 @@ public class PController {
 
 	@GetMapping(path = "/")
 	public String getPalindrome() {
-		return "Hellow";
+		String msg =  service.fetchPalindrome();
+		if (msg == null)
+		{
+			msg = "No palindrome found";
+		}
+		
+		return msg;
 	}
 
 	@PostMapping(path = "/{str}")
-
-	// public String addEmployee(@RequestBody(required = false) Palindrome str)
-	// throws Exception {
 	public void addEmployee(@PathVariable(value = "str") String str) throws Exception {
 		String s = service.getLongestString(service.palindromeList(str));
-		// new
-		// Palindrome(setLargestPalindrome(service.getLongestString(service.palindromeList(s))));
+		
+		//Store palindrome
+		service.save(str, s);
 
-		// PService.save();
 	}
 
 }
